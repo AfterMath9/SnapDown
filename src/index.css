@@ -412,4 +412,56 @@ h1 {
     .download-all-button:disabled {
         animation: pulse 1.5s infinite;
     }
+    /* Add these styles to your CSS file */
+    /* Mobile-friendly theme toggle button */
+    .theme-toggle-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-purple);
+        border: none;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        padding: 0;
+    }
+    .theme-toggle-button:hover,
+    .theme-toggle-button:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .theme-toggle-button:active {
+        transform: translateY(1px);
+    }
+    .toggle-icon {
+        animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    /* Remove the slider checkbox styles that were causing issues on mobile */
+    .switch,
+    .slider,
+    .slider:before {
+        display: none;
+    }
+    /* Additional responsive styles for mobile */
+    @media (max-width: 480px) {
+        .settings-option {
+            padding: 12px 0;
+        }
+        .theme-toggle-button {
+            width: 36px;
+            height: 36px;
+        }
+    }
 }

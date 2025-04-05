@@ -41,6 +41,12 @@ const Snapdown = () => {
     }
   }, [isDarkMode]);
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Other functions (fetchStories, downloadStory, etc.) remain the same
+
   const fetchStories = async () => {
     if (!username) {
       setError("Please enter a username");
@@ -167,14 +173,18 @@ const Snapdown = () => {
           
           <div className="settings-option">
             <span>Dark Mode</span>
-            <label className="switch">
-              <input 
-                type="checkbox" 
-                checked={isDarkMode}
-                onChange={() => setIsDarkMode(!isDarkMode)}
-              />
-              <span className="slider round"></span>
-            </label>
+            {/* Mobile-friendly toggle button */}
+            <button 
+              className="theme-toggle-button" 
+              onClick={toggleDarkMode}
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDarkMode ? (
+                <Sun size={20} className="toggle-icon" />
+              ) : (
+                <Moon size={20} className="toggle-icon" />
+              )}
+            </button>
           </div>
           
           <div className="settings-section">
