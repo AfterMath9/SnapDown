@@ -384,4 +384,32 @@ h1 {
         flex-direction: column;
         align-items: stretch;
     }
+    /* Add these styles to your existing CSS */
+    /* Download All button styling */
+    .download-all-button {
+        background: var(--gradient-purple) !important;
+        color: white !important;
+        margin-left: 15px;
+        position: relative;
+        overflow: hidden;
+    }
+    .download-all-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    /* Optional: Add a pulsing animation when downloading */
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.7;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .download-all-button:disabled {
+        animation: pulse 1.5s infinite;
+    }
 }

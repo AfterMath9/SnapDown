@@ -15,7 +15,8 @@ import {
   Twitter,
   Send,
   Coffee,
-  Bug
+  Bug,
+  DownloadCloud
 } from 'lucide-react';
 import VideoPlayerComponent from "./VideoPlayerComponent";
 
@@ -27,6 +28,7 @@ const Snapdown = () => {
   const [error, setError] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   // Effect to apply dark mode
   useEffect(() => {
@@ -90,6 +92,57 @@ const Snapdown = () => {
     } catch (error) {
       console.error("Error downloading story:", error);
       alert("Failed to download story");
+    }
+  };
+
+  const downloadAllStories = async () => {
+    if (stories.length === 0) {
+      setError("No stories available to download");
+      return;
+    }
+    
+    setIsDownloading(true);
+    setError("Downloading all stories, please wait...");
+    
+    let successCount = 0;
+    
+    try {
+      for (let i = 0; i < stories.length; i++) {
+        const url = stories[i].url;
+        const response = await axios.get(url, { responseType: "blob" });
+        
+        const mimeType = response.headers["content-type"];
+        const fileExtension = mimeType.includes("image") ? ".jpg" : ".mp4";
+        
+        const blob = new Blob([response.data], { type: mimeType });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        
+        link.download = `snapdown_story_${i+1}${fileExtension}`;
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        successCount++;
+        
+        // Small delay to prevent overwhelming the browser
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+      
+      setError(`Downloaded ${successCount} of ${stories.length} stories successfully`);
+    } catch (error) {
+      console.error("Error downloading all stories:", error);
+      setError(`Downloaded ${successCount} of ${stories.length} stories. Some downloads failed.`);
+    } finally {
+      setIsDownloading(false);
+      
+      // Clear message after a few seconds
+      setTimeout(() => {
+        if (error.includes("Downloaded")) {
+          setError("");
+        }
+      }, 5000);
     }
   };
 
@@ -167,9 +220,9 @@ const Snapdown = () => {
         </div>
       )}
 
-<h1>
-  <Download size={40} /> Snapdown
-</h1>
+      <h1>
+        <Download size={40} /> Snapdown
+      </h1>
 
       <div className="search-container">
         <input
@@ -218,6 +271,17 @@ const Snapdown = () => {
         >
           <Video size={16} /> Videos
         </button>
+        
+        {/* Download All Button */}
+        {stories.length > 0 && (
+          <button 
+            className="filter-button download-all-button" 
+            onClick={downloadAllStories}
+            disabled={isDownloading}
+          >
+            <DownloadCloud size={16} /> {isDownloading ? 'Downloading...' : 'Download All'}
+          </button>
+        )}
       </div>
 
       <div className={viewMode === "list" ? "list-view" : "grid-view"}>
