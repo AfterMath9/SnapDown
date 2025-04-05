@@ -156,7 +156,7 @@ h1 {
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     padding: 0;
-    margin-right: 25px;
+    margin-right: 15px;
     /* This moves the button to the left */
 }
 
@@ -404,21 +404,24 @@ h1 {
     .settings-modal {
         width: 250px;
     }
+    /* Make sure view and filter buttons stay in a row on tablets */
+    .view-filter-container {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
 }
 
 @media (max-width: 480px) {
     .grid-view {
         grid-template-columns: 1fr;
+        /* Force a single column on mobile */
+        width: 100%;
     }
     .search-button {
         padding: 10px 15px;
     }
     .settings-modal {
         width: 100%;
-    }
-    .view-filter-container {
-        flex-direction: column;
-        align-items: stretch;
     }
     .settings-option {
         padding: 12px 0;
@@ -430,7 +433,20 @@ h1 {
     .theme-toggle-button {
         width: 36px;
         height: 36px;
-        margin-right: 25px;
+        margin-right: 10px;
         /* Slightly less margin on mobile */
+    }
+    /* Improved mobile layout for filter buttons */
+    .view-filter-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* Two buttons per row on mobile */
+        gap: 8px;
+    }
+    /* Make the download all button full width */
+    .download-all-button {
+        grid-column: 1 / -1;
+        /* Make it span the full width */
+        margin-top: 8px;
     }
 }
