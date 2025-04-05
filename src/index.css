@@ -133,62 +133,63 @@ h1 {
 }
 
 
-/* Toggle Switch Styling */
+/* Updated settings option for dark mode */
 
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
+.settings-option:first-of-type {
+    padding-right: 20px;
 }
 
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
 
-.toggle-switch label {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--bg-element);
-    transition: .4s;
-    border-radius: 34px;
+/* Mobile-friendly theme toggle button */
+
+.theme-toggle-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-}
-
-.toggle-switch label:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: var(--accent-primary);
-    transition: .4s;
-    border-radius: 50%;
-}
-
-.toggle-switch input:checked+label:before {
-    transform: translateX(26px);
-}
-
-.toggle-switch .toggle-icon {
-    position: absolute;
+    justify-content: center;
+    background: var(--gradient-purple);
+    border: none;
     color: white;
-    z-index: 1;
-    left: 5px;
-    top: 5px;
-    transition: .4s;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    margin-right: 15px;
+    /* This moves the button to the left */
 }
 
-.toggle-switch input:checked+label .toggle-icon {
-    transform: translateX(26px);
+.theme-toggle-button:hover,
+.theme-toggle-button:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle-button:active {
+    transform: translateY(1px);
+}
+
+.toggle-icon {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Remove the slider checkbox styles that were causing issues on mobile */
+
+.switch,
+.slider,
+.slider:before {
+    display: none;
 }
 
 .settings-section {
@@ -307,6 +308,41 @@ h1 {
 }
 
 
+/* Download All button styling */
+
+.download-all-button {
+    background: var(--gradient-purple) !important;
+    color: white !important;
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.download-all-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* Optional: Add a pulsing animation when downloading */
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.download-all-button:disabled {
+    animation: pulse 1.5s infinite;
+}
+
+
 /* Stories Grid/List */
 
 .grid-view {
@@ -384,84 +420,17 @@ h1 {
         flex-direction: column;
         align-items: stretch;
     }
-    /* Add these styles to your existing CSS */
-    /* Download All button styling */
-    .download-all-button {
-        background: var(--gradient-purple) !important;
-        color: white !important;
-        margin-left: 15px;
-        position: relative;
-        overflow: hidden;
+    .settings-option {
+        padding: 12px 0;
     }
-    .download-all-button:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
+    .settings-option:first-of-type {
+        padding-right: 15px;
+        /* Slightly less padding on mobile */
     }
-    /* Optional: Add a pulsing animation when downloading */
-    @keyframes pulse {
-        0% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.7;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-    .download-all-button:disabled {
-        animation: pulse 1.5s infinite;
-    }
-    /* Add these styles to your CSS file */
-    /* Mobile-friendly theme toggle button */
     .theme-toggle-button {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--gradient-purple);
-        border: none;
-        color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        padding: 0;
-    }
-    .theme-toggle-button:hover,
-    .theme-toggle-button:focus {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .theme-toggle-button:active {
-        transform: translateY(1px);
-    }
-    .toggle-icon {
-        animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    /* Remove the slider checkbox styles that were causing issues on mobile */
-    .switch,
-    .slider,
-    .slider:before {
-        display: none;
-    }
-    /* Additional responsive styles for mobile */
-    @media (max-width: 480px) {
-        .settings-option {
-            padding: 12px 0;
-        }
-        .theme-toggle-button {
-            width: 36px;
-            height: 36px;
-        }
+        width: 36px;
+        height: 36px;
+        margin-right: 10px;
+        /* Slightly less margin on mobile */
     }
 }
