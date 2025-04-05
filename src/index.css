@@ -156,7 +156,7 @@ h1 {
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     padding: 0;
-    margin-right: 15px;
+    margin-right: 25px;
     /* This moves the button to the left */
 }
 
@@ -430,7 +430,7 @@ h1 {
     .theme-toggle-button {
         width: 36px;
         height: 36px;
-        margin-right: 10px;
+        margin-right: 25px;
         /* Slightly less margin on mobile */
     }
 }
